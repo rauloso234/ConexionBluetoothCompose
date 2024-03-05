@@ -254,36 +254,6 @@ fun MyUI(connectStatus: MutableState<String>) {
             {
                 Text("  LED ON  ")
             }
-            Button(onClick = {
-                dataExchaneInstance?.write("B".toByteArray())
-            }
-            )
-            {
-                Text("  LED OFF  ")
-            }
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth())
-        {
-            Button(
-                onClick = {
-                    val str = dataExchaneInstance?.read()
-                    if (str != null) {
-                        capteur1.value = str
-                    } else connectStatus.value = "rien"
-                },
-                modifier = Modifier.padding(start = 48.dp)
-            )
-            {
-                Text("  READ  ")
-            }
-            Text(
-                text = capteur1.value,
-                modifier = Modifier
-                    .padding(start = 96.dp)
-                    .background(Color(0x80E2EBEA))
-                    .padding(horizontal = 16.dp)  // marge intérieure
-            )
         }
     }
 }
