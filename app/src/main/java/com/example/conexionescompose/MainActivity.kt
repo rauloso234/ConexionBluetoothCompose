@@ -96,12 +96,12 @@ class MainActivity : ComponentActivity() {
         val handler = Handler(Looper.getMainLooper()) { msg ->
             when (msg.what) {
                 CONNECTION_FAILED -> {
-                    status.value += "La connexion à HC-05 a échoué\n"
+                    status.value += "Conexion con el dispositivo exitosa\n"
                     true
                 }
 
                 CONNECTION_SUCCESS -> {
-                    status.value += "Connexion à HC-05 réussie\n"
+                    status.value += "Conexion con el dispositivo fallida\n"
                     true
                 }
 
@@ -127,10 +127,10 @@ class MainActivity : ComponentActivity() {
                 blutoothPermission
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            status.value += "Permission déjà accordée \nTentative de connexion\n"
+            status.value += "Permiso ya concedido \nTentative de connexion\n"
             status.value += connectHC05(bluetoothAdapter, handler)
         } else {
-            status.value += "On va demander la permission\n"
+            status.value += "pedir Permisos\n"
             requestPermissionLauncher.launch(blutoothPermission)
         }
         setContent {
@@ -222,7 +222,7 @@ class DataExchange(mmSocket: BluetoothSocket) : Thread() {
             }
             return String(mmBuffer, 0, numBytesReaded)
         } catch (e: IOException) {
-            return "erreur" // Retourner une chaîne vide en cas d'erreur
+            return "Error" // Retourner une chaîne vide en cas d'erreur
         }
     }
 }
@@ -231,7 +231,7 @@ class DataExchange(mmSocket: BluetoothSocket) : Thread() {
 @Composable
 fun MyUI(connectStatus: MutableState<String>) {
     //val connectStatus = remember { mutableStateOf(status.toString()) }
-    val capteur1 = remember { mutableStateOf("Rien") }
+    val capteur1 = remember { mutableStateOf("Nova") }
     Column {
         Text(
             text = connectStatus.value,
